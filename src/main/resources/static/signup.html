@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bank 266</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+</head>
+<body>
+<div class="main">
+    <h2 class="welcome" align="center">Welcome to Bank 266 </h2>
+    <p class="sign" align="center">Open New Account</p>
+    <form action="bank/account/validRegistration" class="form1" method="get">
+        <input class="un" name= "username" align="center" placeholder="Username">
+        <input type="password" class="pass" name = "password"  align="center" placeholder="Password">
+        <input class="initial" name = "initialBalance" align="center" placeholder="Initial Balance">
+        <input type="submit" class="submit" value= "Register" align="center">
+        <p class="signup" align="center">Already have an account? <a href="/bank/"> Login here </a></p>
+    </form>
+    </form>
+    <p th:text="${message}"></p>
+<!--    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>-->
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+

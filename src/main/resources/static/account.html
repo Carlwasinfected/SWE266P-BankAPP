@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Bank 266</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <!--    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+
+</head>
+<body>
+<div class="main">
+    <h2 class="welcome" align="center" th:text="'Welcome to Bank 266, ' + ${username}" />
+<!--    <p class="sign" align="center">Balance: </p>-->
+    <p class="sign" align="center" th:text="'Balance: $ ' + ${balance}" />
+    <p class="sign" align="center" th:if="${warning!=null}" th:utext="${warning}"/>
+    <form class="form1" method="POST" action="#" th:action="@{/account}" th:object="${comment}" >
+        <input class="amount" align="center" name="amount" placeholder="Amount: " >
+        <textarea class="amount" align="center" rows="5" cols="30" th:field="*{message}" th:placeholder="'Additional comment about this transaction ...'"></textarea>
+        <input type="submit" class="withdraw" align="left" name="withdraw" value="Withdraw">
+        <input type="submit" class="deposit" align="right" name="deposit" value="Deposit">
+        <!--        <a class="submit" align="center">Submit</a>-->
+        <p class="signup" align="center"><a href="/logout"> Logout </a></p>
+    </form>
+
+    <p class="sign" align="center" th:if="${lastComment!=null}" th:utext="${lastComment}"/>
+
+
+</div>
+
+
+</body>
+</html>
