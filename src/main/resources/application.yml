@@ -1,0 +1,23 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: studyhardandgoodluck
+#    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        dialect: com.swe265.bank.component.MySQL5TableType
+    database: mysql
+  application:
+    name: bank
+server:
+  port: 8081
+  servlet:
+    context-path: /bank

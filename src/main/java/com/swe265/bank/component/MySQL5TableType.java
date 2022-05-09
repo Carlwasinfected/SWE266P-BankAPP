@@ -1,0 +1,17 @@
+package com.swe265.bank.component;
+
+import org.hibernate.dialect.MySQL5Dialect;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author Huang Yuxin
+ * @date 2022/5/9
+ */
+@Component
+public class MySQL5TableType extends MySQL5Dialect {
+
+    @Override
+    public String getTableTypeString() {
+        return "ENGINE=InnoDB DEFAULT CHARSET=utf8";
+    }
+}

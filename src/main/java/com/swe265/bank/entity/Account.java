@@ -1,31 +1,41 @@
 package com.swe265.bank.entity;
 
 
+import lombok.Data;
+
+import javax.persistence.*;
+
 /**
  *  This is an entity to record user info
  */
+@Data
+@Entity
+@Table(name = "account")
 public class Account {
-    private double amount;
+    /**
+     * user id
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 32)
     private long id;
 
-    public Account() {
-        // TODO
-    }
+    /**
+     * username
+     */
+    @Column(name = "name", columnDefinition = "VARCHAR(255) NOT NULL COMMENT 'username'")
+    private String name;
 
+    /**
+     * password of user
+     */
+    @Column(name = "password", columnDefinition = "VARCHAR(255) NOT NULL COMMENT 'password'")
+    private String password;
 
-    public double getAmount() {
-        return amount;
-    }
+    /**
+     * money in account
+     */
+    @Column(name = "balance", scale = 2)
+    private double balance;
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 }
