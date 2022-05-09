@@ -12,12 +12,12 @@
 <div class="main">
     <h2 class="welcome" align="center">Welcome to Bank 266 </h2>
     <p class="sign" align="center">Open New Account</p>
-    <form action="bank/account/validRegistration" class="form1" method="get">
+    <form action="validRegistration" class="form1" method="get">
         <input class="un" name= "username" align="center" placeholder="Username">
         <input type="password" class="pass" name = "password"  align="center" placeholder="Password">
         <input class="initial" name = "initialBalance" align="center" placeholder="Initial Balance">
         <input type="submit" class="submit" value= "Register" align="center">
-        <p class="signup" align="center">Already have an account? <a href="/bank/"> Login here </a></p>
+        <p class="signup" align="center">Already have an account? <a href="/bank"> Login here </a></p>
     </form>
     </form>
     <p th:text="${message}"></p>
