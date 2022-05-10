@@ -2,10 +2,9 @@ package com.swe265.bank.service;
 
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
-import com.swe265.bank.utils.StringValidatorUtil;
+import com.swe265.bank.utils.AmountValidUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -23,9 +22,9 @@ public class LoginRegService {
     @Resource
     private AccountRepository accountRepository;
 
-    public String registerUser(String username, String password, Double initialBalance){
+    public String registerUser(String username, String password, String initialBalance){
         String userId = UUID.randomUUID().toString();
-        accountRepository.saveAccount(userId, initialBalance, username, password);
+        accountRepository.saveAccount(userId, Double.parseDouble(initialBalance), username, password);
         return userId;
     }
 
@@ -42,8 +41,8 @@ public class LoginRegService {
     public ModelAndView loginUser(String username, String password) {
         Account account;
         ModelAndView mv = new ModelAndView();
-        if (!StringValidatorUtil.isNameOrPasswordValid(username) ||
-                !StringValidatorUtil.isNameOrPasswordValid(password)) {
+        if (!AmountValidUtil.namePasswordCheck(username) ||
+                !AmountValidUtil.namePasswordCheck(password)) {
             mv.setViewName("error");
             mv.addObject("message", "Invalid Input!");
         }
@@ -57,7 +56,7 @@ public class LoginRegService {
         } else {
             // username and password does not match
             mv.setViewName("error");
-            mv.addObject("message", "Your input does not match any user.");
+            mv.addObject("message", "Username or Password error! Please check again!");
         }
 
         return mv;

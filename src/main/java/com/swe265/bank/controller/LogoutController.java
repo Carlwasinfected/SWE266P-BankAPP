@@ -1,12 +1,14 @@
 package com.swe265.bank.controller;
 
 import com.swe265.bank.service.LogoutService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Can Wang
@@ -20,7 +22,11 @@ public class LogoutController {
     private LogoutService logoutService;
 
     @GetMapping("/logout")
-    public ModelAndView logout() {
+    public ModelAndView logout(HttpServletRequest httpRequest,
+                               HttpServletResponse response) {
+        HttpSession session = httpRequest.getSession();
+        session.removeAttribute("username");
+        session.invalidate();
         return logoutService.logout();
     }
 }

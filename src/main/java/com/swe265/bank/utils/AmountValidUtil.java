@@ -1,5 +1,7 @@
 package com.swe265.bank.utils;
 
+import java.math.BigDecimal;
+
 public class AmountValidUtil {
 
     public static boolean numericInputsCheck(String amount) {
@@ -27,12 +29,29 @@ public class AmountValidUtil {
         } else {
             return false;
         }
+    }
 
+    public static int doubleCompare(double d1, double d2) {
+        BigDecimal b1 = new BigDecimal(d1);
+        BigDecimal b2 = new BigDecimal(d2);
+        return b1.compareTo(b2);
+    }
+
+
+    public static boolean namePasswordCheck(String name) {
+        if (name != null && !"".equals(name.trim()) &&
+                name.length()>=1 && name.length() <=127 &&
+                name.matches("[_\\-\\.0-9a-z]*") ){
+            return true;
+        }
+        return false;
 
     }
 
+
     public static void main(String[] args) {
-        String[] split = "123.45".split("\\.");
-        System.out.println(numericInputsCheck("123.45"));
+//        String[] split = "123.45".split("\\.");
+//        System.out.println(numericInputsCheck("0123.45"));
+        System.out.println(namePasswordCheck("gasjkgpqwehotqp40w8_.-"));
     }
 }
