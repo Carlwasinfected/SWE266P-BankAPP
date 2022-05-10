@@ -4,6 +4,7 @@ import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import com.swe265.bank.utils.Utils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/account")
+@Slf4j
 public class LoginRegController {
 
     @Resource
@@ -52,11 +54,12 @@ public class LoginRegController {
         Account acc = accountRepository.findByName(username);
         ModelAndView mv = new ModelAndView();
         if (acc != null) {
-            System.out.println("Already has the user "+ username);
+            String message = username + ", The name has already been registered";
+            System.out.println();
+            mv.addObject("message", message);
             mv.setViewName("signup");
         } else {
             String id = loginRegService.registerUser(username, password, initialBalance);
-
 
             if (id != null) {
                 mv.addObject("username", username);

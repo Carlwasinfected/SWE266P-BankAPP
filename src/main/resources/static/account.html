@@ -14,14 +14,13 @@
     <h2 class="welcome" text-align="center" th:text="'Welcome to Bank 266, ' + ${username}" />
     <p class="sign" text-align="center" th:text="'Balance: $ ' + ${balance}" />
     <p class="sign" text-align="center" th:if="${warning!=null}" th:utext="${warning}"/>
-    <form class="form1" method="POST" action="#" th:action="@{/account}">
+    <form class="form1" method="Post" action="#" th:action="@{transaction/account}">
         <input class="id" text-align="center" type="hidden" name="id" th:value="${id}" >
         <input class="amount" text-align="center" name="amount" placeholder="Amount: " >
         <input type="submit" class="withdraw" text-align="left" name="withdraw" value="Withdraw">
         <input type="submit" class="deposit" text-align="right" name="deposit" value="Deposit">
         <p class="signup" text-align="center"><a href="/bank/logout"> Logout </a></p>
     </form>
-
 </div>
 
 

@@ -6,6 +6,7 @@ import com.swe265.bank.utils.AmountValidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * @author Can Wang
@@ -18,34 +19,18 @@ public class TransactionService {
     @Resource
     AccountRepository accountRepository;
 
-    /**
-     *
-     * @param amount
-     * @return true, false
-     */
-    public Account deposit(String amount, String id) {
-        Account account = accountRepository.findById(id);
-        if(account == null){
-            return null;
-        }
-        AmountValidUtil validAmount = new AmountValidUtil();
-        validAmount.AmountValidUtil(amount);
-        if (validAmount.getAmount() != null) {
-            Double depositAmount = validAmount.getAmount();
-            double balance = account.getBalance() + depositAmount;
-            accountRepository.updateById(balance, id);
-        }
-        return accountRepository.findById(id);
-
+    public Account withdraw(double money, Account account) {
+        BigDecimal bd1 = new BigDecimal(account.getBalance());
+        BigDecimal bd2 = new BigDecimal(money);
+        double balance = bd1.subtract(bd2).doubleValue();
+        accountRepository.updateBalanceById(balance, account.getId());
+        return accountRepository.findById(account.getId());
     }
 
-    /**
-     *
-     * @param amount
-     * @return 0: invalid input 1: amount exceeds balance 2: ok
-     */
-    public int withdraw(String amount) {
-        return 0;
+    public Account deposit(Double money, Account account) throws Exception {
+        double sum = Double.sum(account.getBalance(), money);
+        accountRepository.updateBalanceById(sum, account.getId());
+        return accountRepository.findById(account.getId());
     }
 
 }

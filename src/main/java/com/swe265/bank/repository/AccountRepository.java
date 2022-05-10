@@ -19,8 +19,19 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
   @Query(value = "select * from account where name=(?1) and password=(?2)", nativeQuery = true)
   Account findAccountByNameAndPassword(String name, String password);  // used by `signin` feature
 
+
   @Modifying
   @Transactional
   @Query(value = "insert into account(id, balance, name, password) values (?1, ?2, ?3, ?4)", nativeQuery = true)
   void saveAccount(String userId, double balance, String username, String password);
+
+  @Modifying
+  @Transactional
+  @Query(value = "update account set balance = ?1 where id = ?2", nativeQuery = true)
+  void updateBalanceById(Double balance, String userId);
+
+  @Modifying
+  @Transactional
+  @Query(value = "select * from account where id = ?1", nativeQuery = true)
+  Account findById(String userId);
 }
