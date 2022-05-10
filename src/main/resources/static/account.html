@@ -1,28 +1,47 @@
+
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html>
 <head>
     <title>Bank 266</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" th:href="@{/style.css}" />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-    <!--    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        body,h1 {font-family: "Raleway", Arial, sans-serif}
+        h1 {letter-spacing: 6px}
+        .w3-row-padding img {margin-bottom: 12px}
+    </style>
 </head>
 <body>
-<div class="main">
-    <h2 class="welcome" text-align="center" th:text="'Welcome to Bank 266, ' + ${username}" />
-    <p class="sign" text-align="center" th:text="'Balance: $ ' + ${balance}" />
-    <p class="sign" text-align="center" th:if="${warning!=null}" th:utext="${warning}"/>
-    <form class="form1" method="Post" action="#" th:action="@{transaction/account}">
-        <input class="id" text-align="center" type="hidden" name="id" th:value="${id}" >
-        <input class="amount" text-align="center" name="amount" placeholder="Amount: " >
-        <input type="submit" class="withdraw" text-align="left" name="withdraw" value="Withdraw">
-        <input type="submit" class="deposit" text-align="right" name="deposit" value="Deposit">
-        <p class="signup" text-align="center"><a href="/bank/logout"> Logout </a></p>
-    </form>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+
+    <!-- Header -->
+    <header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+        <h2 class="welcome" text-align="center" th:text="${username} +',     Welcome to Bank 266' " />
+        <p class="sign" text-align="center" th:text="'Balance: $ ' + ${balance}" />
+        <p class="sign" text-align="center" th:if="${warning!=null}" th:utext="${warning}"/>
+
+
+        <form class="form1" method="POST" action="#" th:action="@{/account}">
+            <input class="id" text-align="center" type="hidden" name="id" th:value="${id}" >
+            <input class="amount" text-align="center" name="amount" placeholder="Amount: " >
+            <input type="submit" class="withdraw" text-align="left" name="withdraw" value="Withdraw">
+            <input type="submit" class="deposit" text-align="right" name="deposit" value="Deposit">
+            <p class="signup" text-align="center"><a href="/bank/logout"> Logout </a></p>
+        </form>
+    </header>
+
+
 </div>
 
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+
+    <p>Powered by Group #12</p>
+</footer>
 
 </body>
 </html>
+
