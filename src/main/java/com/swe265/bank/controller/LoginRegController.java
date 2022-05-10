@@ -38,12 +38,13 @@ public class LoginRegController {
     public ModelAndView validRegistration(@RequestParam("username") String username,
                                           @RequestParam("password") String password,
                                           @RequestParam("initialBalance") Double initialBalance){
-        boolean registerUser = loginRegService.registerUser(username, password, initialBalance);
+        String id = loginRegService.registerUser(username, password, initialBalance);
         ModelAndView mv = new ModelAndView();
 
-        if(registerUser){
+        if(id != null){
             mv.addObject("username", username);
             mv.addObject("balance", initialBalance);
+            mv.addObject("id", id);
             mv.setViewName("account");
         }else{
             mv.addObject("message", "Register error! Please check your input and try again!");

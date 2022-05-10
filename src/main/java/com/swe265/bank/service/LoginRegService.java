@@ -3,35 +3,41 @@ package com.swe265.bank.service;
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.utils.StringValidatorUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Huang Yuxin, Can Wang
  * @date 2022/5/8
  */
 @Service
+@Slf4j
 public class LoginRegService {
 
     @Resource
     private AccountRepository accountRepository;
 
-    public boolean registerUser(String username, String password, Double initialBalance){
-        Account account = new Account();
-        account.setBalance(initialBalance);
-        account.setName(username);
-        account.setPassword(password);
-        try {
-            accountRepository.save(account);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public String registerUser(String username, String password, Double initialBalance){
+//        Account account = new Account();
+//        account.setBalance(initialBalance);
+//        account.setName(username);
+//        account.setPassword(password);
+//        Account save = new Account();
+//        try {
+//            save = accountRepository.save(account);
+//        } catch (Exception e) {
+//            log.error("Register user error ");
+//            throw new RuntimeException("Register user error "+ e.getMessage());
+//        }
+        String userId = UUID.randomUUID().toString();
+        accountRepository.saveAccount(userId, username, password, initialBalance);
+        return userId;
     }
 
     /**
