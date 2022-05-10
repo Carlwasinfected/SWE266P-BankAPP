@@ -6,10 +6,10 @@ Configuration
 Setting your MySqlWorkBench according to Line 4 to Line 7
 https://github.com/Carlwasinfected/SWE266P-BankAPP/blob/master/src/main/resources/application.yml
 
-After complete the configuration, create a new schema/
-  Schema Name:    bank
-  Character Set:  utf8mb4
-  Collation:      utf8mb4_0900_ai_ci
+After complete the configuration, create a new schema/>
+>  Schema Name:    bank
+>  Character Set:  utf8mb4
+>  Collation:      utf8mb4_0900_ai_ci
   
 Run
 ---
