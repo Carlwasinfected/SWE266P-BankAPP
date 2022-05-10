@@ -24,6 +24,10 @@ Login
 ----
 There is no default account, you should create admin account by yourself
 
+Logout
+----
+Click Button log out, you could log out our system
+
 Forget Password
 ---
 You could click password hint if you forget your password
