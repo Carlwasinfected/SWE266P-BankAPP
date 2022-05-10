@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 /**
  * Account Operation Controller
- * @author Huang Yuxin
+ * @author Huang Yuxin, Can Wang
  * @date 2022/5/8
  */
 @Controller

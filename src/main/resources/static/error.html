@@ -1,9 +1,11 @@
 <html>
 <body>
 
-  <h1>Error occurred</h1>
+  <h1>Your request has an error or cannot be processed.</h1>
+  <p>Hint Below: </p>
+  <p th:text="${message}", style="color:red;font-size:25px"></p>
+  <p></p>
   <a href="/bank">Back to Login</a>
-  <p th:text="${message}"></p>
 
 </body>
 </html>
