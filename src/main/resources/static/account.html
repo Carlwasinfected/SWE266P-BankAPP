@@ -12,21 +12,15 @@
 <body>
 <div class="main">
     <h2 class="welcome" text-align="center" th:text="'Welcome to Bank 266, ' + ${username}" />
-<!--    <p class="sign" text-align="center">Balance: </p>-->
     <p class="sign" text-align="center" th:text="'Balance: $ ' + ${balance}" />
     <p class="sign" text-align="center" th:if="${warning!=null}" th:utext="${warning}"/>
     <form class="form1" method="POST" action="#" th:action="@{/account}">
+        <input class="id" text-align="center" type="hidden" name="id" th:value="${id}" >
         <input class="amount" text-align="center" name="amount" placeholder="Amount: " >
-<!--        <textarea class="amount" text-align="center" rows="5" cols="30" th:field="*{message}" th:placeholder="'Additional comment about this transaction ...'"></textarea>-->
         <input type="submit" class="withdraw" text-align="left" name="withdraw" value="Withdraw">
         <input type="submit" class="deposit" text-align="right" name="deposit" value="Deposit">
-        <!--        <a class="submit" text-align="center">Submit</a>-->
         <p class="signup" text-align="center"><a href="/logout"> Logout </a></p>
     </form>
-
-<!--    <p class="sign" text-align="center" th:if="${lastComment!=null}" th:utext="${lastComment}"/>-->
-
-
 </div>
 
 
