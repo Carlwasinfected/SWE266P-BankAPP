@@ -5,7 +5,7 @@
 
 The user can set up the web application and its local MySQL environment by following the instructions [here](https://github.com/Carlwasinfected/SWE266P-BankAPP/blob/master/README.md).
 
-- Download the source code from our GitHub repository [here](https://github.com/Carlwasinfected/SWE266P-BankAPP). Type the Git command below.
+- Download the source code from our GitHub repository [here](https://github.com/Carlwasinfected/SWE266P-BankAPP.git). Type the Git command below.
     
     `git clone https://github.com/Carlwasinfected/SWE266P-BankAPP.git`
     
@@ -14,21 +14,19 @@ The user can set up the web application and its local MySQL environment by follo
     ![*Fig 1, Create schema of MySqlWorkBench*](https://github.com/Carlwasinfected/hximgs/blob/main/data/mysqlworkbench.png)
     
     *Fig 1, Create schema of MySqlWorkBench*
-
-
+    
 - Open the project via IntelliJ IDEA, Goto `src/main/resources/application.yml`.
     - Set your own MySQL username and password in `username` and `password` field.
-    - Set `ddl-auto` to `update` or `create`. Remember that if you choose `create` here, the application will drop the table once restarting, meaning you have to create your account by registering it again.
-- Goto `src/main/java/com/swe265/bank/repository/AccountRepository.java`
-    - Set your own MySQL username and password in function "public Connection createConnection()"
-- Goto `src/main/java/com/swe265/bank/BankApplication.java`, start the project locally.
-- Goto [`http://127.0.0.1:8081/bank`](http://127.0.0.1:8081/bank), and start your exploration!
+    - Before the next step, please make sure your connection to MySQL is available!
+- Go to the root path of the project and execute the SQL script named `account.sql`. It will create an account table, and initialize a user, whose username is `admin`; password is `admin` and balance is `100.00`.
+- Go to `src/main/java/com/swe265/bank/BankApplication.java`, and start the project locally.
+- Go to [`http://127.0.0.1:8081/bank`](http://127.0.0.1:8081/bank), and start your exploration!
 
 If you successfully run the application locally, the login page should pop up and it should look like the image below.
 
-![Fig 2. The login page](https://github.com/Carlwasinfected/hximgs/blob/main/data/loginpage.png)
+![*Fig 2. The login page*](https://github.com/Carlwasinfected/hximgs/blob/main/data/loginpage.png)
 
-Fig 2. The login page
+*Fig 2. The login page*
 
 ## B. How to explore features
 
