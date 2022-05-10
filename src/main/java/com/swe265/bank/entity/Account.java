@@ -16,7 +16,7 @@ public class Account {
      * user id
      */
     @Id
-    @Column(name = "id", length = 32)
+    @Column(name = "id")
     private String id;
 
     /**
@@ -34,7 +34,7 @@ public class Account {
     /**
      * money in account
      */
-    @Column(name = "balance", scale = 2)
+    @Column(name = "balance")
     private double balance;
 
 }

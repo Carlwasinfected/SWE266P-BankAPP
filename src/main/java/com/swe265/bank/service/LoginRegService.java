@@ -36,7 +36,7 @@ public class LoginRegService {
 //            throw new RuntimeException("Register user error "+ e.getMessage());
 //        }
         String userId = UUID.randomUUID().toString();
-        accountRepository.saveAccount(userId, username, password, initialBalance);
+        accountRepository.saveAccount(userId, initialBalance, username, password);
         return userId;
     }
 
