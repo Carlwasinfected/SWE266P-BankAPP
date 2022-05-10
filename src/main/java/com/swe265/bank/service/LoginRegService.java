@@ -2,10 +2,12 @@ package com.swe265.bank.service;
 
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
+import com.swe265.bank.utils.StringValidatorUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * @author Huang Yuxin
@@ -30,4 +32,27 @@ public class LoginRegService {
         }
         return true;
     }
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return String type: operation result message
+     */
+    public String loginUser(String username, String password) {
+        Account account;
+        if (!StringValidatorUtil.isNameOrPasswordValid(username) ||
+                !StringValidatorUtil.isNameOrPasswordValid(password)) return "Invalid Input!";
+        Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findByNameAndPassword(username, password));
+        if (accountOptional.isPresent()) {
+            account = accountOptional.get();
+
+            return "Login OK";
+        } else {
+            // username and password does not match
+            return "Your input cannot match any user in DB.";
+        }
+
+    }
+
 }
