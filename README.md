@@ -14,10 +14,13 @@ The user can set up the web application and its local MySQL environment by follo
     ![*Fig 1, Create schema of MySqlWorkBench*](https://github.com/Carlwasinfected/hximgs/blob/main/data/mysqlworkbench.png)
     
     *Fig 1, Create schema of MySqlWorkBench*
-    
+
+
 - Open the project via IntelliJ IDEA, Goto `src/main/resources/application.yml`.
     - Set your own MySQL username and password in `username` and `password` field.
     - Set `ddl-auto` to `update` or `create`. Remember that if you choose `create` here, the application will drop the table once restarting, meaning you have to create your account by registering it again.
+- Goto `src/main/java/com/swe265/bank/repository/AccountRepository.java`
+    - Set your own MySQL username and password in function "public Connection createConnection()"
 - Goto `src/main/java/com/swe265/bank/BankApplication.java`, start the project locally.
 - Goto [`http://127.0.0.1:8081/bank`](http://127.0.0.1:8081/bank), and start your exploration!
 
