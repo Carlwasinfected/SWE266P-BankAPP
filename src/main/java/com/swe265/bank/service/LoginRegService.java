@@ -41,11 +41,12 @@ public class LoginRegService {
     public ModelAndView loginUser(String username, String password) {
         Account account;
         ModelAndView mv = new ModelAndView();
-        if (!AmountValidUtil.namePasswordCheck(username) ||
-                !AmountValidUtil.namePasswordCheck(password)) {
-            mv.setViewName("error");
-            mv.addObject("message", "Invalid Input!");
-        }
+//        if (!AmountValidUtil.namePasswordCheck(username) ||
+//                !AmountValidUtil.namePasswordCheck(password)) {
+//            mv.setViewName("error");
+//            mv.addObject("message", "Invalid Input!");
+//            return mv;
+//        }
         Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findAccountByNameAndPassword(username, password));
         if (accountOptional.isPresent()) {
             account = accountOptional.get();

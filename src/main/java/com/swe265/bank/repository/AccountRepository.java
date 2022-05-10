@@ -51,7 +51,7 @@ public class AccountRepository {
         Connection connect = null;
         try {
             connect = createConnection();
-            String sql = "SELECT * FROM account WHERE name = '" + name + "'and password = '" + password + "'";
+            String sql = "SELECT * FROM account WHERE name = '" + name + "' and password = '" + password + "'";
             Statement statement = connect.createStatement();
             statement = connect.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
