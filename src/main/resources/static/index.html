@@ -12,7 +12,7 @@
 <div class="main">
     <h2 class="welcome" text-align="center">Welcome to Bank 266 </h2>
     <p class="sign" text-align="center">Sign in</p>
-    <form action="/login" class="form1" method="get">
+    <form action="/bank/account/login" class="form1" method="get">
         <input class="un" name="username" type="text" text-align="center" placeholder="Username">
         <input type="password" class="pass" name="password" text-align="center" placeholder="Password">
         <input type="submit" class="submit" text-align="center" value="Sign in">
@@ -21,6 +21,7 @@
         <script>
             function forgetFunction() {
                 alert("Please call 800-555-4567 to retrieve your password!");
+
             }
         </script>
         <p class="signup" text-align="center">Don't have an account? <a href="/bank/account/register"> Register here </a></p>
