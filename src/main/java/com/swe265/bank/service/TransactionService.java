@@ -1,6 +1,8 @@
 package com.swe265.bank.service;
 
+import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
+import com.swe265.bank.utils.AmountValidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,8 +23,20 @@ public class TransactionService {
      * @param amount
      * @return true, false
      */
-    public boolean deposit(String amount) {
-        return true;
+    public Account deposit(String amount, String id) {
+        Account account = accountRepository.findById(id);
+        if(account == null){
+            return null;
+        }
+        AmountValidUtil validAmount = new AmountValidUtil();
+        validAmount.AmountValidUtil(amount);
+        if (validAmount.getAmount() != null) {
+            Double depositAmount = validAmount.getAmount();
+            double balance = account.getBalance() + depositAmount;
+            accountRepository.updateById(balance, id);
+        }
+        return accountRepository.findById(id);
+
     }
 
     /**
