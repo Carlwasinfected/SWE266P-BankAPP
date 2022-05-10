@@ -2,33 +2,43 @@
 <html>
 <head>
     <title>Bank 266</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        body,h1 {font-family: "Raleway", Arial, sans-serif}
+        h1 {letter-spacing: 6px}
+        .w3-row-padding img {margin-bottom: 12px}
+    </style>
 </head>
 <body>
-<div class="main">
-    <h2 class="welcome" text-align="center">Welcome to Bank 266 </h2>
-    <p class="sign" text-align="center">Sign in</p>
-    <form action="/bank/account/login" class="form1" method="get">
-        <input class="un" name="username" type="text" text-align="center" placeholder="Username">
-        <input type="password" class="pass" name="password" text-align="center" placeholder="Password">
-        <input type="submit" class="submit" text-align="center" value="Sign in">
-<!--        <p class="forgot" text-align="center"><a href="#">Forgot Password? </a></p>-->
-        <div text-align="center"><button onclick="forgetFunction()">Forgot Password?</button></div>
-        <script>
-            function forgetFunction() {
-                alert("Please call 800-555-4567 to retrieve your password!");
 
-            }
-        </script>
-        <p class="signup" text-align="center">Don't have an account? <a href="/bank/account/register"> Register here </a></p>
-    </form>
+<!-- !PAGE CONTENT! -->
+<div class="w3-content" style="max-width:1500px">
+
+    <!-- Header -->
+    <header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+        <h1 class="w3-xlarge">Welcome to Bank 266</h1>
+
+        <form action="/bank/account/login" class="form1" method="get">
+            <input  name="username" type="text" text-align="center" placeholder="Username">
+            <input type="password" class="pass" name="password" text-align="center" placeholder="Password">
+            <input type="submit" class="submit" text-align="center" value="Sign in">
+
+
+            <p class="signup" text-align="center">Don't have an account <a href="/bank/account/register"> Register here </a></p>
+        </form>
+    </header>
+
 
 </div>
-</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-large">
+
+    <p>Powered by Group #12</p>
+</footer>
+
 </body>
 </html>
 
