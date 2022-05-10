@@ -70,4 +70,27 @@ public class LoginRegService {
         return mv;
     }
 
+    public ModelAndView loginUserWithSession(String username) {
+        Account account;
+        ModelAndView mv = new ModelAndView();
+
+        Account acc = accountRepository.findByName(username);
+        //System.out.println("all+ " +accountRepository.findAll());
+        //System.out.println("loginUserWithSession" + acc.getName());
+        if (acc != null) {
+
+            mv.setViewName("account");
+            mv.addObject("id", acc.getId());
+            mv.addObject("username", acc.getName());
+            mv.addObject("balance", acc.getBalance());
+        } else {
+            // username and password does not match
+            System.out.println("No result");
+            mv.setViewName("error");
+            mv.addObject("message", "Your input does not match any user.");
+        }
+
+        return mv;
+    }
+
 }
