@@ -31,9 +31,10 @@ You could click password hint if you forget your password
 Check Balance
 ----
 Once you login, your account balance will display on the website automatically.
+After transaction, you could use Button "Refresh Balance" to refresh your balance.
 
 Withdraw and Deposit
 ----
 After you login, you could input an amount that you want to deposit or withdraw.
 After hit button "Withdraw" or "Deposit", Your operation will work successfuly.
-You could use Button "Refresh Balance" to refresh your balance.
+
