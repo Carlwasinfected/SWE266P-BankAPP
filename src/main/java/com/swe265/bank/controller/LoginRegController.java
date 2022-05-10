@@ -1,12 +1,12 @@
 package com.swe265.bank.controller;
 
-import com.swe265.bank.entity.Account;
-import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 
@@ -35,14 +35,21 @@ public class LoginRegController {
      */
     @GetMapping("/validRegistration")
     @ResponseBody
-    public String validRegistration(@RequestParam("username") String username,
-                                    @RequestParam("password") String password,
-                                    @RequestParam("initialBalance") Double initialBalance){
+    public ModelAndView validRegistration(@RequestParam("username") String username,
+                                          @RequestParam("password") String password,
+                                          @RequestParam("initialBalance") Double initialBalance){
         boolean registerUser = loginRegService.registerUser(username, password, initialBalance);
+        ModelAndView mv = new ModelAndView();
+
         if(registerUser){
-            return "Register Success";
+            mv.addObject("username", username);
+            mv.addObject("balance", initialBalance);
+            mv.setViewName("account");
+        }else{
+            mv.addObject("message", "Register error! Please check your input and try again!");
+            mv.setViewName("signup");
         }
-        return "Register Success";
+        return mv;
     }
 
     /**
