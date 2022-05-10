@@ -122,7 +122,7 @@ public class LoginRegController {
             model.setViewName("error");
             return model;
         }
-        boolean flag = AmountValidUtil.checkAmount(amount);
+        boolean flag = AmountValidUtil.numericInputsCheck(amount);
         if (!flag) {
             model.addObject("message", "Invalid Amount Number");
             model.setViewName("error");

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+</head>
+<body>
+<!-- !PAGE CONTENT! -->
+<div class="container">
+    <div class="login-wrapper">
+        <div class="header">Sign Up</div>
+        <div class="form-wrapper" style="text-align:center;vertical-align:middle;">
+            <form action="validRegistration" class="form1" method="get">
+                <input class="input-item" name= "username" text-align="center" placeholder="Username">
+                <input type="password" class="input-item" name = "password"  text-align="center" placeholder="Password">
+                <input class="input-item" name = "initialBalance" text-align="center" placeholder="Initial Balance">
+                <input type="submit" class="btn" value= "Register" text-align="center">
+            </form>
+        </div>
+        <div class="msg">
+            Already have an account? <a href="/bank">Login Here</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
