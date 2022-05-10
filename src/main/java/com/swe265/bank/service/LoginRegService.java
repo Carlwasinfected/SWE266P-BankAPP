@@ -24,20 +24,13 @@ public class LoginRegService {
     private AccountRepository accountRepository;
 
     public String registerUser(String username, String password, Double initialBalance){
-//        Account account = new Account();
-//        account.setBalance(initialBalance);
-//        account.setName(username);
-//        account.setPassword(password);
-//        Account save = new Account();
-//        try {
-//            save = accountRepository.save(account);
-//        } catch (Exception e) {
-//            log.error("Register user error ");
-//            throw new RuntimeException("Register user error "+ e.getMessage());
-//        }
         String userId = UUID.randomUUID().toString();
         accountRepository.saveAccount(userId, initialBalance, username, password);
         return userId;
+    }
+
+    public Account getInfo(String id){
+        return accountRepository.findById(id);
     }
 
     /**

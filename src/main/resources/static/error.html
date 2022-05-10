@@ -1,11 +1,22 @@
+<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+</head>
 <body>
+<div class="container">
+    <div class="login-wrapper">
+        <div class="header">Error Page</div>
+        <h3> Request Error Info : </h3>
+        <p th:text="${message}" , style="color:red;font-size:25px"></p>
 
-  <h1>Your request has an error or cannot be processed.</h1>
-  <p>Hint Below: </p>
-  <p th:text="${message}", style="color:red;font-size:25px"></p>
-  <p></p>
-  <a href="/bank">Back to Login</a>
-
+        <div class="msg">
+            <a href="/bank">Sign In</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

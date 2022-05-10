@@ -24,51 +24,7 @@ import java.math.BigDecimal;
 @RequestMapping("/transaction")
 public class TransactionController {
 
-    @Resource
-    AccountRepository accountRepository;
 
-    @Resource
-    TransactionService transactionService;
-
-    private String getUsername(HttpServletRequest httpRequest) {
-        String username = (String) httpRequest.getSession().getAttribute("username");
-        if (username == null) {
-            System.out.println("Invalid username");
-            return null;
-        }
-        return username;
-    }
-
-    @PostMapping(value = "/account")
-    public ModelAndView deposit(@RequestParam("id") String id,
-                                @RequestParam("amount") String amount,
-                                @RequestParam(name = "withdraw", required = false) String withdraw,
-                                @RequestParam(name = "deposit", required = false) String deposit) throws Exception {
-        Account account = accountRepository.findById(id);
-        ModelAndView model = new ModelAndView();
-        if (account == null) {
-            model.addObject("message", "Invalid User Info");
-            model.setViewName("error");
-            return model;
-        }
-        boolean flag = AmountValidUtil.checkAmount(amount);
-        if (!flag) {
-            model.addObject("message", "Invalid Amount Number");
-            model.setViewName("error");
-            return model;
-        }
-        double money = Double.parseDouble(amount);
-        if (StringUtils.hasLength(withdraw)) {
-            account = transactionService.withdraw(money, account);
-        } else {
-            account = transactionService.deposit(money, account);
-        }
-        model.addObject("balance", account.getBalance());
-        model.addObject("name", account.getName());
-        model.addObject("id", account.getId());
-        model.setViewName("account");
-        return model;
-    }
 
 
 

@@ -3,14 +3,16 @@ package com.swe265.bank.controller;
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
+import com.swe265.bank.service.TransactionService;
+import com.swe265.bank.utils.AmountValidUtil;
 import com.swe265.bank.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +33,9 @@ public class LoginRegController {
 
     @Resource
     private LoginRegService loginRegService;
+
+    @Resource
+    TransactionService transactionService;
 
     @RequestMapping("/register")
     public String index() {
@@ -91,6 +96,61 @@ public class LoginRegController {
             return loginRegService.loginUserWithSession(sessionUsername);
         }
         return loginRegService.loginUser(username, password);
+    }
+
+
+
+
+    private String getUsername(HttpServletRequest httpRequest) {
+        String username = (String) httpRequest.getSession().getAttribute("username");
+        if (username == null) {
+            System.out.println("Invalid username");
+            return null;
+        }
+        return username;
+    }
+
+    @PostMapping(value = "/transaction")
+    public ModelAndView transaction(@RequestParam("id") String id,
+                                @RequestParam("amount") String amount,
+                                @RequestParam(name = "withdraw", required = false) String withdraw,
+                                @RequestParam(name = "deposit", required = false) String deposit) throws Exception {
+        Account account = accountRepository.findById(id);
+        ModelAndView model = new ModelAndView();
+        if (account == null) {
+            model.addObject("message", "Invalid User Info");
+            model.setViewName("error");
+            return model;
+        }
+        boolean flag = AmountValidUtil.checkAmount(amount);
+        if (!flag) {
+            model.addObject("message", "Invalid Amount Number");
+            model.setViewName("error");
+            return model;
+        }
+        double money = Double.parseDouble(amount);
+        if (StringUtils.hasLength(withdraw)) {
+            account = transactionService.withdraw(money, account);
+        } else {
+            account = transactionService.deposit(money, account);
+        }
+        model.addObject("balance", account.getBalance());
+        model.addObject("username", account.getName());
+        model.addObject("id", account.getId());
+        model.setViewName("account");
+
+        return model;
+    }
+
+    @GetMapping("/getInfo")
+    public ModelAndView getInfoById(@RequestParam("id") String id){
+        ModelAndView model = new ModelAndView();
+        Account account = loginRegService.getInfo(id);
+        model.addObject("balance", account.getBalance());
+        model.addObject("username", account.getName());
+        model.addObject("id", account.getId());
+        model.setViewName("account");
+        return model;
     }
 
 

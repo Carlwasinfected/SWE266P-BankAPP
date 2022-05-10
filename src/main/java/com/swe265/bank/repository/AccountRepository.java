@@ -30,7 +30,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
   @Query(value = "update account set balance = ?1 where id = ?2", nativeQuery = true)
   void updateBalanceById(Double balance, String userId);
 
-  @Modifying
   @Transactional
   @Query(value = "select * from account where id = ?1", nativeQuery = true)
   Account findById(String userId);
