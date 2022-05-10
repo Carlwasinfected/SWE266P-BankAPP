@@ -5,13 +5,13 @@
 
 The user can set up the web application and its local MySQL environment by following the instructions [here](https://github.com/Carlwasinfected/SWE266P-BankAPP/blob/master/README.md).
 
-- Download the source code from our GitHub repository [here](https://github.com/Carlwasinfected/hximgs/blob/main/data/mysqlworkbench.png). Type the Git command below.
+- Download the source code from our GitHub repository [here](https://github.com/Carlwasinfected/SWE266P-BankAPP). Type the Git command below.
     
     `git clone https://github.com/Carlwasinfected/SWE266P-BankAPP.git`
     
 - Open your local MySQL connection, and create a new schema named `bank`. Remember to set the charset as UTF-8. The following example is using `MySQLWorkbench`.
     
-    ![*Fig 1, Create schema of MySqlWorkBench*]()
+    ![*Fig 1, Create schema of MySqlWorkBench*](https://github.com/Carlwasinfected/hximgs/blob/main/data/mysqlworkbench.png)
     
     *Fig 1, Create schema of MySqlWorkBench*
     
