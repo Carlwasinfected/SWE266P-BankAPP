@@ -5,6 +5,7 @@ import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -42,6 +43,23 @@ public class LoginRegController {
             return "Register Success";
         }
         return "Register Success";
+    }
+
+    /**
+     *
+     * Given the username or password are nonexistent or incorrect
+     *  When I log in to the bank with the above invalid input
+     *  Then the login should fail
+     */
+    @GetMapping("/login")
+    public String login(@RequestParam("username") String username,
+                        @RequestParam("password") String password) {
+        String msg =  loginRegService.loginUser(username, password);
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("error");
+        mv.addObject("message", msg);
+
+        return "OK";
     }
 
 }
