@@ -33,4 +33,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
   @Transactional
   @Query(value = "select * from account where id = ?1", nativeQuery = true)
   Account findById(String userId);
+
+  @Query(value = "select * from account where name = ?1", nativeQuery = true)
+  Account getPasswordHint(String username);
 }

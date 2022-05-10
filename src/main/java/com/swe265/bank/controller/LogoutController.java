@@ -24,9 +24,9 @@ public class LogoutController {
     @GetMapping("/logout")
     public ModelAndView logout(HttpServletRequest httpRequest,
                                HttpServletResponse response) {
-        HttpSession session = httpRequest.getSession();
-        session.removeAttribute("username");
-        session.invalidate();
+//        HttpSession session = httpRequest.getSession();
+//        session.removeAttribute("username");
+//        session.invalidate();
         return logoutService.logout();
     }
 }

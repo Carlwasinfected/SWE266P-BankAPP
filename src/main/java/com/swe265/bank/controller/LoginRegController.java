@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Account Operation Controller
@@ -102,10 +103,14 @@ public class LoginRegController {
                               HttpServletResponse httpResponse) {
         String sessionUsername = (String) httpRequest.getSession().getAttribute("username");
         // check session user equal current username
-        if (sessionUsername != null && username.equals(sessionUsername)) {
+        if (sessionUsername != null
+                && username.equals(sessionUsername)
+        ) {
             return loginRegService.loginUserWithSession(sessionUsername);
         }
-        return loginRegService.loginUser(username, password);
+        ModelAndView modelAndView = loginRegService.loginUser(username, password);
+        Utils.setSessionUserName(httpRequest, httpResponse, username);
+        return modelAndView;
     }
 
     @PostMapping(value = "/transaction")
@@ -164,6 +169,21 @@ public class LoginRegController {
         model.setViewName("account");
         return model;
     }
+    @RequestMapping("/hint")
+    public String getPasswordHint(){
+        return "hint";
+    }
+
+    @GetMapping("/passwordHint")
+    public ModelAndView getPasswordHint(@RequestParam("username") String username){
+        ModelAndView model = new ModelAndView();
+        String passwordHint = loginRegService.getPasswordHint(username);
+        model.addObject("message", passwordHint);
+        model.setViewName("password");
+        return model;
+    }
+
+
 
 
 }

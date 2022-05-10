@@ -85,4 +85,17 @@ public class LoginRegService {
         return mv;
     }
 
+    public String getPasswordHint(String username){
+        Account account = accountRepository.getPasswordHint(username);
+        if(account == null){
+            return "No username exists!";
+        }
+        String password = account.getPassword();
+        String formatString = "Username '" + username + "' has password: %.2s%s";
+        return String.format(
+                formatString,
+                password,
+                String.format("%0" + (password.length() - 2) + "d", 0).replace("0", "*"));
+
+    }
 }
