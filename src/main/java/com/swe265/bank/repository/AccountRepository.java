@@ -1,6 +1,7 @@
 package com.swe265.bank.repository;
 
 import com.swe265.bank.entity.Account;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -12,10 +13,23 @@ import java.sql.*;
 
 @Component
 public class AccountRepository {
+    @Value("${spring.datasource.url}")
+    String databaseUrl;
+
+    @Value("${spring.datasource.driver-class-name}")
+    String drive;
+
+    @Value("${spring.datasource.username}")
+    String password;
+
+    @Value("${spring.datasource.password}")
+    String username;
+
+
     public Connection createConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false";
-        Connection con = DriverManager.getConnection(url, "root", "studyhardandgoodluck");
+        Class.forName(drive);
+        String url = databaseUrl;
+        Connection con = DriverManager.getConnection(url, password, username);
         return con;
     }
 
@@ -81,7 +95,7 @@ public class AccountRepository {
             Statement statement = connect.createStatement();
             statement = connect.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            statement.executeQuery(sql);
+            statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -97,7 +111,7 @@ public class AccountRepository {
             Statement statement = connect.createStatement();
             statement = connect.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
-            statement.executeQuery(sql);
+            statement.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
