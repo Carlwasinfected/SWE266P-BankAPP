@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 /**
  * @author Ruokun Xu, Jing Gu
@@ -32,7 +33,7 @@ public class TransactionController {
     @PostMapping(value = "/account")
     public ModelAndView deposit(@RequestParam("id") long id,
                                 @RequestParam("amount") String deposit) {
-        Account acc = accountRepository.findById(id);
+        Optional<Account> acc = accountRepository.findById(id);
         ModelAndView model = new ModelAndView();
         if (acc == null) {
             model.addObject("message", "Invalid Username");

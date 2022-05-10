@@ -10,13 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Huang Yuxin
  * @date 2022/5/8
  */
+
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
   Account findByName(String name);
-  Account findByNameAndPassword(String name, String password);
+
+  @Query(value = "select * from account where name=(?1) and password=(?2)", nativeQuery = true)
+  Account findAccountByNameAndPassword(String name, String password);  // used by `signin` feature
 
 
   @Transactional
-  @Query(value = "insert into bank (userId, username, password, amount) to bank values (?1, ?2, ?3, ?4)", nativeQuery = true)
-  account saveAccount(String userId, String username, String password, double amount);
+  @Query(value = "insert into account (userId, username, password, amount) to account values (?1, ?2, ?3, ?4)", nativeQuery = true)
+  Account saveAccount(String userId, String username, String password, double amount);
 }

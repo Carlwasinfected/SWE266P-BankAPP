@@ -54,11 +54,13 @@ public class LoginRegService {
             mv.setViewName("error");
             mv.addObject("message", "Invalid Input!");
         }
-        Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findByNameAndPassword(username, password));
+        Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findAccountByNameAndPassword(username, password));
         if (accountOptional.isPresent()) {
             account = accountOptional.get();
             mv.setViewName("account");
             mv.addObject("id", account.getId());
+            mv.addObject("username", account.getName());
+            mv.addObject("balance", account.getBalance());
         } else {
             // username and password does not match
             mv.setViewName("error");
