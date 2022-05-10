@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ruokun Xu, Jing Gu
  * @date 2022/5/10
  */
+@RestController
 public class TransactionController {
     AccountRepository accountRepository;
     Account account;
@@ -49,4 +51,5 @@ public class TransactionController {
         model.setViewName("account");
         return model;
     }
+
 }
