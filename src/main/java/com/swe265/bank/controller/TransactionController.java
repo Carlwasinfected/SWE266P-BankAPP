@@ -5,6 +5,7 @@ import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.utils.AmountValidUtil;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,10 +28,9 @@ public class TransactionController {
         return username;
     }
     @PostMapping(value = "/account")
-    public ModelAndView deposit(@RequestParam(value = "deposit") String deposit,
-                                HttpServletRequest httpRequest) {
-        String username = getUsername(httpRequest);
-        Account acc = accountRepository.findByName(username);
+    public ModelAndView deposit(@RequestParam("id") long id,
+                                @RequestParam("amount") String deposit) {
+        Account acc = accountRepository.findById(id);
         ModelAndView model = new ModelAndView();
         if (acc == null) {
             model.addObject("message", "Invalid Username");
@@ -41,12 +41,10 @@ public class TransactionController {
         validAmount.AmountValidUtil(deposit);
         if (validAmount.getAmount() != null) {
             Double depositAmount = validAmount.getAmount();
-            double balance = account.getBalance();
             account.setBalance(account.getBalance() + depositAmount);
             accountRepository.save(account);
-
         }
-        model.addObject("username", username);
+        model.addObject("id", id);
         model.addObject("balance", account.getBalance());
         model.setViewName("account");
         return model;
