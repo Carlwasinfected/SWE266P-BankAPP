@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bank?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: ""
+    password: studyhardandgoodluck
 #    type: com.alibaba.druid.pool.DruidDataSource
   jpa:
     show-sql: true
