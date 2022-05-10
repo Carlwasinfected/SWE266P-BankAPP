@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 /**
  * Account Operation Controller
- * @author Huang Yuxin
+ * @author Huang Yuxin, Can Wang
  * @date 2022/5/8
  */
 @Controller
@@ -59,14 +59,12 @@ public class LoginRegController {
      *  Then the login should fail
      */
     @GetMapping("/login")
-    public String login(@RequestParam("username") String username,
+    public ModelAndView login(@RequestParam("username") String username,
                         @RequestParam("password") String password) {
-        String msg =  loginRegService.loginUser(username, password);
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("error");
-        mv.addObject("message", msg);
 
-        return "OK";
+        return loginRegService.loginUser(username, password);
     }
+
+
 
 }

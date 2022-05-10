@@ -5,12 +5,13 @@ import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.utils.StringValidatorUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.Optional;
 
 /**
- * @author Huang Yuxin
+ * @author Huang Yuxin, Can Wang
  * @date 2022/5/8
  */
 @Service
@@ -39,20 +40,26 @@ public class LoginRegService {
      * @param password
      * @return String type: operation result message
      */
-    public String loginUser(String username, String password) {
+    public ModelAndView loginUser(String username, String password) {
         Account account;
+        ModelAndView mv = new ModelAndView();
         if (!StringValidatorUtil.isNameOrPasswordValid(username) ||
-                !StringValidatorUtil.isNameOrPasswordValid(password)) return "Invalid Input!";
+                !StringValidatorUtil.isNameOrPasswordValid(password)) {
+            mv.setViewName("error");
+            mv.addObject("message", "Invalid Input!");
+        }
         Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findByNameAndPassword(username, password));
         if (accountOptional.isPresent()) {
             account = accountOptional.get();
-
-            return "Login OK";
+            mv.setViewName("account");
+            mv.addObject("id", account.getId());
         } else {
             // username and password does not match
-            return "Your input cannot match any user in DB.";
+            mv.setViewName("error");
+            mv.addObject("message", "Your input does not match any user.");
         }
 
+        return mv;
     }
 
 }
