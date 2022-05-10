@@ -2,7 +2,6 @@ package com.swe265.bank.service;
 
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
-import com.swe265.bank.utils.AmountValidUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

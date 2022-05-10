@@ -6,15 +6,15 @@ spring:
     username: root
     password: studyhardandgoodluck
 #    type: com.alibaba.druid.pool.DruidDataSource
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    properties:
-      hibernate:
-        dialect: com.swe265.bank.component.MySQL5TableType
-    database: mysql
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+#    properties:
+#      hibernate:
+#        dialect: com.swe265.bank.component.MySQL5TableType
+#    database: mysql
   application:
     name: bank
   thymeleaf:
