@@ -34,12 +34,12 @@ public class AccountRepository {
     }
 
 
-    public Account findByName(String name) {
+    public Account findByName(String username) {
         Account account = null;
         Connection connect = null;
         try {
             connect = createConnection();
-            String sql = "SELECT * FROM account WHERE name = '" + name + "'";
+            String sql = "SELECT * FROM account WHERE name = '" + username + "'";
             Statement statement = connect.createStatement();
             statement = connect.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
@@ -91,7 +91,7 @@ public class AccountRepository {
         try {
             connect = createConnection();
             String sql = "insert into account(id, balance, name, password) values" +
-                    " ( '" + userId + "', +" + balance + " , " + username + " , " + password + " )";
+                    " ( '" + userId + "', +" + balance + " , '" + username + "' , '" + password + "' )";
             Statement statement = connect.createStatement();
             statement = connect.prepareStatement(sql,ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_UPDATABLE);
