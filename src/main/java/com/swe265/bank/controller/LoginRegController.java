@@ -1,6 +1,5 @@
 package com.swe265.bank.controller;
 
-import ch.qos.logback.classic.Logger;
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
@@ -17,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.io.Console;
 
 import static com.swe265.bank.utils.AmountValidUtil.namePasswordCheck;
 
