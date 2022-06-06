@@ -6,6 +6,7 @@ import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import com.swe265.bank.service.TransactionService;
 import com.swe265.bank.utils.AmountValidUtil;
+import com.swe265.bank.utils.UUIDUtil;
 import com.swe265.bank.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -57,8 +58,11 @@ public class LoginRegController {
     @ResponseBody
     public ModelAndView validRegistration(@RequestParam("username") String username,
                                           @RequestParam("password") String password,
-                                          @RequestParam("initialBalance") String initialBalance) {
+                                          @RequestParam("initialBalance") String initialBalance,
+                                          HttpServletRequest httpRequest,
+                                          HttpServletResponse httpResponse) {
         ModelAndView mv = new ModelAndView();
+        Utils.setSessionUserName_R(httpRequest, httpResponse, username);
         // check valid input parameter
         if (!namePasswordCheck(username) ||
                 !namePasswordCheck(password) ||
@@ -163,6 +167,12 @@ public class LoginRegController {
     @GetMapping("/getInfo")
     public ModelAndView getInfoById(@RequestParam("id") String id) {
         ModelAndView model = new ModelAndView();
+        boolean validUUID = UUIDUtil.isValidUUID(id);
+        if (!validUUID) {
+            model.setViewName("error");
+            model.addObject("message", "Username or Password error! Please check again!");
+            return model;
+        }
         Account account = loginRegService.getInfo(id);
         model.addObject("balance", account.getBalance());
         model.addObject("username", account.getName());
