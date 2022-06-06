@@ -62,7 +62,6 @@ public class LoginRegController {
                                           HttpServletRequest httpRequest,
                                           HttpServletResponse httpResponse) {
         ModelAndView mv = new ModelAndView();
-        Utils.setSessionUserName_R(httpRequest, httpResponse, username);
         // check valid input parameter
         if (!namePasswordCheck(username) ||
                 !namePasswordCheck(password) ||
@@ -89,6 +88,7 @@ public class LoginRegController {
             mv.addObject("balance", initialBalance);
             mv.addObject("id", id);
             mv.setViewName("account");
+            Utils.setSessionUserName_R(httpRequest, httpResponse, username);
         } else {
             mv.addObject("message", "Register error! Please check your input and try again!");
             mv.setViewName("signup");
