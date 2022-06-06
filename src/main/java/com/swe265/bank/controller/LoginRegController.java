@@ -1,5 +1,6 @@
 package com.swe265.bank.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
@@ -16,12 +17,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.io.Console;
+
+import static com.swe265.bank.utils.AmountValidUtil.namePasswordCheck;
+
 /**
  * Account Operation Controller
  *
  * @author Huang Yuxin, Can Wang
  * @date 2022/5/8
  */
+
 @Controller
 @RequestMapping("/account")
 @Slf4j
@@ -51,15 +57,12 @@ public class LoginRegController {
     @ResponseBody
     public ModelAndView validRegistration(@RequestParam("username") String username,
                                           @RequestParam("password") String password,
-                                          @RequestParam("initialBalance") String initialBalance,
-                                          HttpServletRequest httpRequest,
-                                          HttpServletResponse httpResponse) {
-        Utils.setSessionUserName(httpRequest, httpResponse, username);
+                                          @RequestParam("initialBalance") String initialBalance) {
         ModelAndView mv = new ModelAndView();
         // check valid input parameter
-        if(!AmountValidUtil.namePasswordCheck(username) ||
-                !AmountValidUtil.namePasswordCheck(password) ||
-                !AmountValidUtil.numericInputsCheck(initialBalance)){
+        if (!namePasswordCheck(username) ||
+                !namePasswordCheck(password) ||
+                !AmountValidUtil.numericInputsCheck(initialBalance)) {
             String message = "the name or password or initialBalance invalid_input";
             mv.addObject("message", message);
             mv.setViewName("signup");
@@ -86,7 +89,6 @@ public class LoginRegController {
             mv.addObject("message", "Register error! Please check your input and try again!");
             mv.setViewName("signup");
         }
-
         return mv;
     }
 
@@ -168,21 +170,24 @@ public class LoginRegController {
         model.setViewName("account");
         return model;
     }
+
     @RequestMapping("/hint")
-    public String getPasswordHint(){
+    public String getPasswordHint() {
         return "hint";
     }
 
     @GetMapping("/passwordHint")
-    public ModelAndView getPasswordHint(@RequestParam("username") String username){
+    public ModelAndView getPasswordHint(@RequestParam("username") String username) {
         ModelAndView model = new ModelAndView();
-        String passwordHint = loginRegService.getPasswordHint(username);
-        model.addObject("message", passwordHint);
+        if (!namePasswordCheck(username)) {
+            model.addObject("message", "Invalid Username");
+        } else {
+            String passwordHint = loginRegService.getPasswordHint(username);
+            model.addObject("message", passwordHint);
+        }
         model.setViewName("password");
         return model;
     }
-
-
-
-
 }
+
+
