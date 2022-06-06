@@ -3,11 +3,13 @@ package com.swe265.bank.service;
 import com.swe265.bank.entity.Account;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.utils.AmountValidUtil;
+import com.swe265.bank.utils.Encrypt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
-
+import com.swe265.bank.utils.Encrypt;
 import javax.annotation.Resource;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,9 +24,11 @@ public class LoginRegService {
     @Resource
     private AccountRepository accountRepository;
 
-    public String registerUser(String username, String password, String initialBalance){
+    public String registerUser(String username, String password, String initialBalance) throws NoSuchAlgorithmException {
         String userId = UUID.randomUUID().toString();
-        accountRepository.saveAccount(userId, Double.parseDouble(initialBalance), username, password);
+
+        String cipher_pwd = Encrypt.getCipher(password);
+        accountRepository.saveAccount(userId, Double.parseDouble(initialBalance), username, cipher_pwd);
         return userId;
     }
 
@@ -38,7 +42,7 @@ public class LoginRegService {
      * @param password
      * @return String type: operation result message
      */
-    public ModelAndView loginUser(String username, String password) {
+    public ModelAndView loginUser(String username, String password) throws NoSuchAlgorithmException {
         Account account;
         ModelAndView mv = new ModelAndView();
 //        if (!AmountValidUtil.namePasswordCheck(username) ||
@@ -47,7 +51,9 @@ public class LoginRegService {
 //            mv.addObject("message", "Invalid Input!");
 //            return mv;
 //        }
-        Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findAccountByNameAndPassword(username, password));
+
+        String cipher_pwd = Encrypt.getCipher(password);
+        Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findAccountByNameAndPassword(username, cipher_pwd));
         if (accountOptional.isPresent()) {
             account = accountOptional.get();
             mv.setViewName("account");
