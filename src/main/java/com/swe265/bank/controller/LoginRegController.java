@@ -5,6 +5,7 @@ import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import com.swe265.bank.service.TransactionService;
 import com.swe265.bank.utils.AmountValidUtil;
+import com.swe265.bank.utils.Encrypt;
 import com.swe265.bank.utils.UUIDUtil;
 import com.swe265.bank.utils.Utils;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import java.security.NoSuchAlgorithmException;
 
 import static com.swe265.bank.utils.AmountValidUtil.namePasswordCheck;
 
@@ -57,7 +60,7 @@ public class LoginRegController {
                                           @RequestParam("password") String password,
                                           @RequestParam("initialBalance") String initialBalance,
                                           HttpServletRequest httpRequest,
-                                          HttpServletResponse httpResponse) {
+                                          HttpServletResponse httpResponse) throws NoSuchAlgorithmException {
         ModelAndView mv = new ModelAndView();
         // check valid input parameter
         if (!namePasswordCheck(username) ||
@@ -85,7 +88,7 @@ public class LoginRegController {
             mv.addObject("balance", initialBalance);
             mv.addObject("id", id);
             mv.setViewName("account");
-            Utils.setSessionUserName_R(httpRequest, httpResponse, username);
+            Utils.setSessionUserName_R(httpRequest, httpResponse, username, Encrypt.getCipher(password));
         } else {
             mv.addObject("message", "Register error! Please check your input and try again!");
             mv.setViewName("signup");
@@ -102,16 +105,16 @@ public class LoginRegController {
     public ModelAndView login(@RequestParam("username") String username,
                               @RequestParam("password") String password,
                               HttpServletRequest httpRequest,
-                              HttpServletResponse httpResponse) {
+                              HttpServletResponse httpResponse) throws NoSuchAlgorithmException {
+        // check username and password
         String sessionUsername = (String) httpRequest.getSession().getAttribute("username");
         // check session user equal current username
         if (sessionUsername != null
-                && username.equals(sessionUsername)
-        ) {
+                && username.equals(sessionUsername)) {
             return loginRegService.loginUserWithSession(sessionUsername);
         }
         ModelAndView modelAndView = loginRegService.loginUser(username, password);
-        Utils.setSessionUserName(httpRequest, httpResponse, username);
+        Utils.setSessionUserName(httpRequest, httpResponse, username, Encrypt.getCipher(password));
         return modelAndView;
     }
 

@@ -45,12 +45,12 @@ public class LoginRegService {
     public ModelAndView loginUser(String username, String password) throws NoSuchAlgorithmException {
         Account account;
         ModelAndView mv = new ModelAndView();
-//        if (!AmountValidUtil.namePasswordCheck(username) ||
-//                !AmountValidUtil.namePasswordCheck(password)) {
-//            mv.setViewName("error");
-//            mv.addObject("message", "Invalid Input!");
-//            return mv;
-//        }
+        if (!AmountValidUtil.namePasswordCheck(username) ||
+                !AmountValidUtil.namePasswordCheck(password)) {
+            mv.setViewName("error");
+            mv.addObject("message", "Invalid Input!");
+            return mv;
+        }
 
         String cipher_pwd = Encrypt.getCipher(password);
         Optional<Account> accountOptional = Optional.ofNullable(accountRepository.findAccountByNameAndPassword(username, cipher_pwd));

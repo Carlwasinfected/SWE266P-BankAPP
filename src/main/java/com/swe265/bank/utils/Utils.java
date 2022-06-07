@@ -7,6 +7,7 @@ import java.util.Collection;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpHeaders;
 
@@ -26,12 +27,18 @@ public class Utils {
         return username;
     }
 
-    public static void setSessionUserName(HttpServletRequest request, HttpServletResponse response, String value) {
-        request.getSession().setAttribute("username", value);
+    public static void setSessionUserName(HttpServletRequest request, HttpServletResponse response, String key, String value) {
+        HttpSession session = request.getSession();
+        // set session timeout for 30 seconds
+        session.setMaxInactiveInterval(60);
+        session.setAttribute(key, value);
         upgradeCookieSecurityForHttpsIfRequired(response);
     }
-    public static void setSessionUserName_R(HttpServletRequest request, HttpServletResponse response, String value) {
-        request.getSession().setAttribute("username_register", value);
+    public static void setSessionUserName_R(HttpServletRequest request, HttpServletResponse response, String key, String value) {
+        HttpSession session = request.getSession();
+        // set session timeout for 30 seconds
+        session.setMaxInactiveInterval(60);
+        session.setAttribute(key, value);
         upgradeCookieSecurityForHttpsIfRequired(response);
     }
 

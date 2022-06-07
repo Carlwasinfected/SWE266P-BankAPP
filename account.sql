@@ -1,3 +1,4 @@
+USE BANK;
 /*
  Navicat Premium Data Transfer
 
@@ -33,7 +34,7 @@ CREATE TABLE `account` (
 -- Records of account
 -- ----------------------------
 BEGIN;
-INSERT INTO `account` VALUES ('f6b795d0-be4e-434b-99e1-0e051c01c9b7', 100, 'admin', 'admin');
+INSERT INTO `account` VALUES ('248980ef-1399-4fed-a455-8f997e0604c2', 100, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;

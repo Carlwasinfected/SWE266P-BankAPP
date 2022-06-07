@@ -46,11 +46,4 @@ public class AmountValidUtil {
         }
         return false;
     }
-
-
-    public static void main(String[] args) {
-//        String[] split = "123.45".split("\\.");
-//        System.out.println(numericInputsCheck("0123.45"));
-        System.out.println(namePasswordCheck("gasjkgpqwehotqp40w8_.-"));
-    }
 }
