@@ -1,6 +1,7 @@
 package com.swe265.bank.controller;
 
 import com.swe265.bank.entity.Account;
+import com.swe265.bank.entity.UserVO;
 import com.swe265.bank.repository.AccountRepository;
 import com.swe265.bank.service.LoginRegService;
 import com.swe265.bank.service.TransactionService;
@@ -101,11 +102,12 @@ public class LoginRegController {
      * When I log in to the bank with the above invalid input
      * Then the login should fail
      */
-    @GetMapping("/login")
-    public ModelAndView login(@RequestParam("username") String username,
-                              @RequestParam("password") String password,
+    @PostMapping("/login")
+    public ModelAndView login(UserVO userVO,
                               HttpServletRequest httpRequest,
                               HttpServletResponse httpResponse) throws NoSuchAlgorithmException {
+        String username = userVO.getUsername();
+        String password = userVO.getPassword();
         // check username and password
         String sessionUsername = (String) httpRequest.getSession().getAttribute("username");
         // check session user equal current username
